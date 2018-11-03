@@ -14,7 +14,6 @@ import { DirectivesModule } from './directives/directives.module';
 import { DisplaySettingsModule } from './display-settings/display-settings.module';
 import { MaterialModule } from './directives/material.module';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -26,7 +25,7 @@ export function getAuthHttp(httpClient) {
   }), httpClient);
 }
 
-let providers: Provider[] = [{
+const providers: Provider[] = [{
   provide: AuthHttp,
   useFactory: getAuthHttp,
   deps: [HttpClient]
@@ -46,7 +45,6 @@ const appRoutes: Routes = [{
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     RouterModule.forRoot(appRoutes, {enableTracing: process.env.toString() === 'development'}),
     UserSettingsModule,
     ReportDownloadModule,
@@ -85,7 +83,7 @@ export class AppModule {
   }
 
   hmrOnDestroy(store) {
-    let cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
+    const cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
     // recreate elements
     store.disposeOldHosts = createNewHosts(cmpLocation);
     // inject your AppStore and grab state then set it on store

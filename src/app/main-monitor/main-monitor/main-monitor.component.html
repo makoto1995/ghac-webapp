@@ -1,3 +1,39 @@
-<p>
-  main-monitor works!
-</p>
+<div class="container-fluid">
+  <mat-card class="line-card" *ngFor="let item of lineList">
+    <mat-card-header>
+      <mat-card-title>{{item.lineName}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-lg-3">
+          <h4>用电</h4>
+          <p>
+            <span>{{lineDatas[item.lineId].electric}}</span>
+            <span>度</span>
+          </p>
+        </div>
+        <div class="col-lg-3">
+          <h4>天然气</h4>
+          <p>
+            <span>{{lineDatas[item.lineId].gas}}</span>
+            <span>度</span>
+          </p>
+        </div>
+        <div class="col-lg-3">
+          <h4>蒸汽</h4>
+          <p>
+            <span>{{lineDatas[item.lineId].steam}}</span>
+            <span>立方米</span>
+          </p>
+        </div>
+        <div class="col-lg-3">
+          <h4>废水</h4>
+          <p>
+            <span>{{lineDatas[item.lineId].waste}}</span>
+            <span>立方米</span>
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

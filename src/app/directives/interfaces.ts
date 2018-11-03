@@ -17,3 +17,12 @@ export interface UserPrivileges {
     canDownloadReport: boolean;
     canViewHistory: boolean;
 }
+export interface Factory {
+    factoryId: number;
+    factoryName: string;
+}
+export interface Line {
+    lineId: number;
+    lineName: string;
+    factoryId: number;
+}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { RouterModule, Routes } from '@angular/router';
 import { MainMonitorComponent } from './main-monitor/main-monitor.component';
@@ -14,6 +14,7 @@ export const routes: Routes = [
     BrowserModule,
     FormsModule,
     ChartsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [MainMonitorComponent],
