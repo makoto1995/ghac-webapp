@@ -1,0 +1,79 @@
+<mat-toolbar color="primary">
+  <ul class="mr-auto">
+    <li>
+      <button mat-icon-button>
+        <a href="/">XX工厂能源管理系统</a>
+      </button>
+    </li>
+    <li [hidden]="!isLoggedIn" *ngFor="let item of menu" routerLinkActive="active" class="active">
+      <a routerLink="{{item.link}}">
+        <button mat-icon-button>
+          {{item.title}}
+        </button>
+      </a>
+    </li>
+    <li [hidden]="!canGetMonitor" routerLinkActive="active" class="active">
+      <a routerLink="/dashboard">
+        <button mat-icon-button routerLink="/dashboard" class="active">
+          点监控面板
+        </button>
+      </a>
+    </li>
+    <li [hidden]="!canViewHistory" routerLinkActive="active" class="active">
+      <a routerLink="/history">
+        <button mat-icon-button class="active">
+          历史数据查询
+        </button>
+      </a>
+    </li>
+    <li [hidden]="!canDownloadReport" routerLinkActive="active" class="active">
+      <a routerLink="/report">
+        <button mat-icon-button class="active">
+          报表下载
+        </button>
+      </a>
+    </li>
+    <li [hidden]="!canModifyUser" routerLinkActive="active" class="active">
+      <a routerLink="/users">
+        <button mat-icon-button class="active">
+          用户管理
+        </button>
+      </a>
+    </li>
+    <li [hidden]="!canModifyDisplay" routerLinkActive="active" class="active">
+      <a routerLink="/edit">
+        <button mat-icon-button class="active">
+          监控点编辑
+        </button>
+      </a>
+    </li>
+  </ul>
+  <span class="fill-remaining-space"></span>
+  <ul class="mr-auto" [hidden]="isLoggedIn">
+    <li routerLinkActive="router-link-active">
+      <a routerLink="/signup">
+        <button mat-icon-button class="active">
+          注册
+        </button>
+      </a>
+    </li>
+    <li routerLinkActive="router-link-active">
+      <a routerLink="/login">
+        <button mat-icon-button class="active">
+          登陆
+        </button>
+      </a>
+    </li>
+  </ul>
+  <p class="my-2 my-sm-0 mx-2" [hidden]="!isLoggedIn">你好，{{currentUser.userName}}</p>
+  <div class="my-2 my-sm-0 mx-2" [hidden]="!isLoggedIn">
+    <a routerLink="/settings" routerLinkActive="router-link-active">
+      <i-settings></i-settings>
+    </a>
+  </div>
+  <a (click)="logout()" [hidden]="!isLoggedIn">
+    <button mat-icon-button class="active">
+      注销
+    </button>
+  </a>
+</mat-toolbar>

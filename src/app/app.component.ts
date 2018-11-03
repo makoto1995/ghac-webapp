@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: `<navbar></navbar>
+  <router-outlet></router-outlet>`
 })
 export class AppComponent {
-  title = 'ghac-webapp';
+  title = '能源管理系统';
 }
