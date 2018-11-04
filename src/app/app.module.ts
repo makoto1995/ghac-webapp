@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { createInputTransfer, createNewHosts, removeNgStyles } from '@angularclass/hmr';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthConfig, AuthHttp } from 'angular2-jwt';
 
 import { UserSettingsModule } from './user-settings/user-settings.module';
 import { ReportDownloadModule } from './report-download/report-download.module';
@@ -17,20 +16,6 @@ import { MaterialModule } from './directives/material.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-export function getAuthHttp(httpClient) {
-  return new AuthHttp(new AuthConfig({
-    noJwtError: true,
-    globalHeaders: [{ 'Accept': 'application/json' }],
-    tokenGetter: (() => localStorage.getItem('id_token')),
-  }), httpClient);
-}
-
-const providers: Provider[] = [{
-  provide: AuthHttp,
-  useFactory: getAuthHttp,
-  deps: [HttpClient]
-}];
-
 const appRoutes: Routes = [{
   path: '',
   redirectTo: '/login',
@@ -38,14 +23,14 @@ const appRoutes: Routes = [{
 }];
 
 @NgModule({
-  providers,
+  providers: [],
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: process.env.toString() === 'development'}),
+    RouterModule.forRoot(appRoutes),
     UserSettingsModule,
     ReportDownloadModule,
     MonitorDashboardModule,

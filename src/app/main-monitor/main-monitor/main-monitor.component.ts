@@ -1,9 +1,8 @@
-import { Result, Factory, Line } from './../../directives/interfaces';
+import { Result, Line } from './../../directives/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './../../directives/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import 'chart.js';
-import { MatDialogRef } from '@angular/material';
 
 interface LineData {
   electric: number;
@@ -18,7 +17,7 @@ interface LineData {
   styleUrls: ['./main-monitor.component.scss']
 })
 export class MainMonitorComponent implements OnInit {
-  static parameters = [];
+  static parameters = [HttpClient, AuthService];
   currentUser = {};
   lineList = [];
   lineDatas = [];
@@ -34,8 +33,8 @@ export class MainMonitorComponent implements OnInit {
   ];
   AuthService;
 
-  constructor(public client: HttpClient) {
-
+  constructor(public client: HttpClient, private authSevice: AuthService) {
+    this.AuthService = authSevice;
   }
 
   ngOnInit() {
