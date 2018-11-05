@@ -1,7 +1,9 @@
 import { Result, Line } from './../../directives/interfaces';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from './../../directives/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Message } from '@stomp/stompjs';
+import { StompService } from '@stomp/ng2-stompjs';
+import { Subscription } from 'rxjs/Subscription';
 import 'chart.js';
 
 interface LineData {
@@ -16,11 +18,13 @@ interface LineData {
   templateUrl: './main-monitor.component.html',
   styleUrls: ['./main-monitor.component.scss']
 })
-export class MainMonitorComponent implements OnInit {
-  static parameters = [HttpClient, AuthService];
+export class MainMonitorComponent implements OnInit, OnDestroy {
+  static parameters = [HttpClient, StompService];
+  private lineDataSubscription: Subscription;
+  public subscribed = false;
   currentUser = {};
   lineList = [];
-  lineDatas = [];
+  lineDatas: LineData[];
   displayItems = [{
       name: '用电'
     }, {
@@ -31,15 +35,35 @@ export class MainMonitorComponent implements OnInit {
       name: '废水'
     }
   ];
-  AuthService;
 
-  constructor(public client: HttpClient, private authSevice: AuthService) {
-    this.AuthService = authSevice;
+  constructor(public client: HttpClient
+    , private _stompService: StompService) {
   }
 
   ngOnInit() {
     this.reset();
+    this.subscribe();
   }
+
+  public subscribe() {
+    console.log(this.subscribed);
+    this.lineDataSubscription = this._stompService.subscribe('/topic/summary').subscribe(this.on_next);
+    this.subscribed = true;
+  }
+
+  public unsubscribe() {
+    this.lineDataSubscription.unsubscribe();
+    this.lineDataSubscription = null;
+  }
+
+  public on_next = (message: Message) => {
+    this.lineDatas = JSON.parse(message.body);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe();
+  }
+
   reset() {
     this.client.get<Result<Line[]>>('http://localhost:9000/configure/line', {
       observe: 'response',
