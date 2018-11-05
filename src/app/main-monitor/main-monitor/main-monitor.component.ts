@@ -1,6 +1,6 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Result, Line } from './../../directives/interfaces';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Message } from '@stomp/stompjs';
 import { StompService } from '@stomp/ng2-stompjs';
 import { Subscription } from 'rxjs/Subscription';

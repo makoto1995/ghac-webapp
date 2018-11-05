@@ -1,3 +1,4 @@
+import { IconsModule } from './icons.module';
 import { MaterialModule } from './material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     CommonModule,
     MaterialModule,
     RouterModule,
-    AuthModule
+    AuthModule,
+    IconsModule
   ],
   declarations: [NavbarComponent],
   exports: [

@@ -26,3 +26,16 @@ export interface Line {
     lineName: string;
     factoryId: number;
 }
+export interface Place {
+    placeId: number;
+    placeName: string;
+    lineId: number;
+}
+export interface IOPoint {
+    id: number;
+    address: string;
+    type: string;
+    placeId: number;
+    lineId: number;
+    factoryId: number;
+}
