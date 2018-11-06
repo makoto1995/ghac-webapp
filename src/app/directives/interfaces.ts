@@ -38,4 +38,5 @@ export interface IOPoint {
     placeId: number;
     lineId: number;
     factoryId: number;
+    value: number;
 }
