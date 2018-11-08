@@ -1,5 +1,5 @@
 import { AuthService } from './../../directives/auth/auth.service';
-import { Component, OnInit, OnDestroy, Injectable } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Result, Line, Place, IOPoint, User } from './../../directives/interfaces';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Message } from '@stomp/stompjs';
