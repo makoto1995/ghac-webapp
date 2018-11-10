@@ -35,6 +35,7 @@ const stompConfig: StompConfig = {
     RouterModule.forChild(routes)
   ],
   declarations: [RealTimeDataComponent, TrendChartComponent],
+  entryComponents: [RealTimeDataComponent, TrendChartComponent],
   exports: [RealTimeDataComponent],
   providers: [
     StompService, {

@@ -40,3 +40,9 @@ export interface IOPoint {
     factoryId: number;
     value: number;
 }
+export interface LineData {
+    electric: number;
+    gas: number;
+    steam: number;
+    waste: number;
+}

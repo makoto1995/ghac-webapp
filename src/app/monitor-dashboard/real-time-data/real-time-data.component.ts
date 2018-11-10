@@ -1,3 +1,4 @@
+import { TrendChartComponent } from './../trend-chart/trend-chart.component';
 import { AuthService } from './../../directives/auth/auth.service';
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Result, Line, Place, IOPoint, User } from './../../directives/interfaces';
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
+import { MatDialog } from '@angular/material';
 
 interface PointMessage {
   address: string;
@@ -47,7 +49,7 @@ class PointNode implements FilterNode {
   styleUrls: ['./real-time-data.component.scss']
 })
 export class RealTimeDataComponent implements OnInit, OnDestroy {
-  static parameters = [HttpClient, StompService, AuthService];
+  static parameters = [HttpClient, StompService, AuthService, MatDialog];
   lineList = [];
   placeList = [];
   iOPointList = [];
@@ -70,7 +72,8 @@ export class RealTimeDataComponent implements OnInit, OnDestroy {
   public subscribed = false;
   constructor(public client: HttpClient
     , private _stompService: StompService
-    , private _authService: AuthService) {
+    , private _authService: AuthService
+    , public dialog: MatDialog) {
     this.currentUser = _authService.currentUser;
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<FilterFlatNode>(this.getLevel, this.isExpandable);
@@ -92,6 +95,17 @@ export class RealTimeDataComponent implements OnInit, OnDestroy {
         return place;
       });
       return line;
+    });
+  }
+
+  openTrend = (id: number) => {
+    const lineData = this.lineList.filter((line: Line) => {
+      return line.lineId === id;
+    })[0];
+    this.dialog.open(TrendChartComponent, {
+      data : {
+        line: lineData
+      }
     });
   }
 

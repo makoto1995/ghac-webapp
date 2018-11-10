@@ -31,6 +31,7 @@
     <mat-divider></mat-divider>
     <div class="line-container" *ngFor="let lineNode of lineNodes" [hidden]="!checklistSelection.isSelected(nestedNodeMap.get(lineNode))">
       <h3>{{lineNode.name}}</h3>
+      <button mat-raised-button (click)="openTrend(lineNode.id)">显示趋势</button>
       <mat-card *ngFor="let placeNode of lineNode.children" [hidden]="!checklistSelection.isSelected(nestedNodeMap.get(placeNode))">
         <mat-card-header>
           <mat-card-title>{{placeNode.name}}</mat-card-title>
