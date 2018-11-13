@@ -1,4 +1,4 @@
-<h1 mat-dialog-title></h1>
+<h1 mat-dialog-title>{{data.line.lineName}}24小时趋势图</h1>
 <mat-dialog-content>
   <canvas baseChart width="600" height="400" [datasets]="trendChartData" [labels]="trendChartLabels" [options]="trendChartOptions"
     [legend]="trendChartLegend" [chartType]="trendChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>

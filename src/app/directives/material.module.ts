@@ -18,7 +18,7 @@ import {
     // MatExpansionModule,
     // MatGridListModule,
     MatIconModule,
-    // MatInputModule,
+    MatInputModule,
     // MatListModule,
     // MatMenuModule,
     // MatNativeDateModule,
@@ -39,6 +39,8 @@ import {
     MatToolbarModule,
     // MatTooltipModule,
     MatTreeModule,
+    MatFormFieldModule,
+    MatNativeDateModule
 } from '@angular/material';
 
 @NgModule({
@@ -61,7 +63,7 @@ import {
         // MatExpansionModule,
         // MatGridListModule,
         MatIconModule,
-        // MatInputModule,
+        MatInputModule,
         // MatListModule,
         // MatMenuModule,
         // MatNativeDateModule,
@@ -82,6 +84,8 @@ import {
         // MatTooltipModule,
         MatTreeModule,
         ScrollingModule,
+        MatFormFieldModule,
+        MatNativeDateModule
     ]
 })
 export class MaterialModule { }
