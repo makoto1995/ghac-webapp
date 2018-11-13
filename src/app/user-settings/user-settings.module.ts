@@ -13,7 +13,11 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
 
-const userRoutes: Routes = [];
+const userRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent},
+  { path: 'usersettings', component: UserSettingsComponent}
+];
 
 @NgModule({
   imports: [
