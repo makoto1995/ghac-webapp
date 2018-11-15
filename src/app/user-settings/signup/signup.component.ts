@@ -4,17 +4,8 @@ import { AuthService } from './../../directives/auth/auth.service';
 import { User } from './../../directives/interfaces';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Validators, FormControl, FormGroup, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
-
-export class ConfirmPwdErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
-    const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
-
-    return (invalidCtrl || invalidParent);
-  }
-}
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ConfirmPwdErrorStateMatcher } from './../../directives/util';
 
 @Component({
   selector: 'app-signup',
@@ -41,14 +32,6 @@ export class SignupComponent {
   Router;
   signupForm: FormGroup;
   matcher = new ConfirmPwdErrorStateMatcher();
-  // name = new FormControl('', {
-  //   validators: Validators.required,
-  //   updateOn: 'blur'
-  // });
-  // pwd = new FormControl('', {
-  //   validators: Validators.required,
-  //   updateOn: 'blur'
-  // });
   confirmPassword;
 
   checkPassword(group: FormGroup) {
@@ -75,8 +58,8 @@ export class SignupComponent {
         updateOn: 'blur'
       }]
     }, {
-      validator: this.checkPassword
-    });
+        validator: this.checkPassword
+      });
   }
 
   register() {

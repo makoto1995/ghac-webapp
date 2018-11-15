@@ -1,0 +1,26 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+
+.change-password-card {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: auto;
+}
+
+.change-password-form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 0 20px;
+  margin: 0;
+}
+
+.change-password-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 10px 0 10px;
+  margin: 0
+}

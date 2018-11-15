@@ -1,3 +1,29 @@
-<p>
-  user-settings works!
-</p>
+<div class="main-container">
+  <mat-card class="change-pwd-card">
+    <mat-card-header>
+      <mat-card-title>更改密码</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="change-pwd-form">
+      <form [formGroup]="changePasswordForm">
+        <mat-form-field>
+          <mat-label>旧密码</mat-label>
+          <input matInput type="password" placeholder="旧密码" [(ngModel)]="oldPassword" formControlName="oldPwd">
+          <mat-error *ngIf="changePasswordForm.hasError('required', 'oldPwd')">请输入旧密码</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>新密码</mat-label>
+          <input matInput type="password" placeholder="新密码" [(ngModel)]="newPassword" formControlName="pwd">
+          <mat-error *ngIf="changePasswordForm.hasError('required', 'pwd')">请输入新密码</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>确认新密码</mat-label>
+          <input matInput type="password" placeholder="确认新密码" [(ngModel)]="confirmPassword" formControlName="confirmPwd">
+          <mat-error *ngIf="changePasswordForm.hasError('notSame')">确认密码不一致，请重新输入</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="change-password-actions">
+      <button mat-button disabled="!changePasswordForm.valid" (click)="changePassword()" color="primary">提交</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

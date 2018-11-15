@@ -4,13 +4,19 @@
 
 import {isFunction, noop } from 'lodash';
 import {Response} from '@angular/http';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material';
 
-/**
- * Return a callback or noop function
- *
- * @param  {Function|*} cb - a 'potential' function
- * @return {Function}
- */
+
+export class ConfirmPwdErrorStateMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
+        const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
+
+        return (invalidCtrl || invalidParent);
+    }
+}
+
 export function safeCb(cb) {
     return isFunction(cb) ? cb : noop;
 }
@@ -18,11 +24,9 @@ export function safeCb(cb) {
 /**
  * Parse a given url with the use of an anchor element
  *
- * @param  {String} url - the url to parse
- * @return {Object}     - the parsed url, anchor element
  */
 export function urlParse(url) {
-    var a = document.createElement('a');
+    const a = document.createElement('a');
     a.href = url;
 
     // Special treatment for IE, see http://stackoverflow.com/a/13405933 for details
@@ -36,9 +40,6 @@ export function urlParse(url) {
 /**
  * Test whether or not a given url is same origin
  *
- * @param  {String}           url       - url to test
- * @param  {String|String[]}  [origins] - additional origins to test against
- * @return {Boolean}                    - true if url is same origin
  */
 export function isSameOrigin(url, origins) {
     url = urlParse(url);
@@ -46,13 +47,13 @@ export function isSameOrigin(url, origins) {
     origins = origins.map(urlParse);
     origins.push(window.location);
     origins = origins.filter(function(o) {
-        let hostnameCheck = url.hostname === o.hostname;
-        let protocolCheck = url.protocol === o.protocol;
+        const hostnameCheck = url.hostname === o.hostname;
+        const protocolCheck = url.protocol === o.protocol;
         // 2nd part of the special treatment for IE fix (see above):
         // This part is when using well-known ports 80 or 443 with IE,
         // when window.location.port==='' instead of the real port number.
         // Probably the same cause as this IE bug: https://goo.gl/J9hRta
-        let portCheck = url.port === o.port || (o.port === '' && (url.port === '80' || url.port === '443'));
+        const portCheck = url.port === o.port || (o.port === '' && (url.port === '80' || url.port === '443'));
         return hostnameCheck && protocolCheck && portCheck;
     });
     return origins.length >= 1;
