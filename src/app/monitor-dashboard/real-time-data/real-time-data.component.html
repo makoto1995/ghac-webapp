@@ -27,28 +27,35 @@
     </mat-tree>
   </mat-sidenav>
   <mat-sidenav-content>
-    <p><button mat-raised-button (click)="sideNav.toggle()">筛选</button></p>
+    <button mat-raised-button (click)="sideNav.toggle()">筛选</button>
     <mat-divider></mat-divider>
-    <div class="line-container" *ngFor="let lineNode of lineNodes" [hidden]="!checklistSelection.isSelected(nestedNodeMap.get(lineNode))">
-      <h3>{{lineNode.name}}</h3>
-      <button mat-raised-button (click)="openTrend(lineNode.id)">显示趋势</button>
-      <mat-card *ngFor="let placeNode of lineNode.children" [hidden]="!checklistSelection.isSelected(nestedNodeMap.get(placeNode))">
+    <div class="line-container">
+      <mat-card class="line-card" *ngFor="let lineNode of lineNodes" [hidden]="!checklistSelection.isSelected(nestedNodeMap.get(lineNode))">
         <mat-card-header>
-          <mat-card-title>{{placeNode.name}}</mat-card-title>
+          <mat-card-title>{{lineNode.name}}</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          <mat-card *ngFor="let pointNode of placeNode.children" [hidden]="!pointNode.pointShown">
+        <mat-card-content class="place-container">
+          <mat-card class="place-card" *ngFor="let placeNode of lineNode.children" [hidden]="!checklistSelection.isSelected(nestedNodeMap.get(placeNode))">
             <mat-card-header>
-              <mat-card-title>{{pointNode.name}}</mat-card-title>
-              <mat-card-subtitle>{{pointNode.type}}</mat-card-subtitle>
+              <mat-card-title>{{placeNode.name}}</mat-card-title>
             </mat-card-header>
-            <mat-card-content>
-              <h1>{{pointNode.value}}</h1>
+            <mat-card-content class="point-container">
+              <mat-card class="point-card" *ngFor="let pointNode of placeNode.children" [hidden]="!pointNode.pointShown">
+                <mat-card-header>
+                  <mat-card-title>{{pointNode.name}}</mat-card-title>
+                  <mat-card-subtitle>{{pointNode.type}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <h1>{{pointNode.value}}</h1>
+                </mat-card-content>
+              </mat-card>
             </mat-card-content>
           </mat-card>
         </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="openTrend(lineNode.id)">显示趋势</button>
+        </mat-card-actions>
       </mat-card>
-      <mat-divider></mat-divider>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

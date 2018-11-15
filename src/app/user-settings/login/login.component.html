@@ -1,21 +1,25 @@
-<mat-card class="login-card">
-  <mat-card-header>
-    <mat-card-title>登陆</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="login-form">
-    <mat-form-field>
-      <mat-label>用户名</mat-label>
-      <input matInput placeholder="用户名" [(ngModel)]="user.userName" autofocus [formControl]="name">
-      <mat-error *ngIf="!name.valid">请输入用户名</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>密码</mat-label>
-      <input matInput placeholder="密码" [(ngModel)]="user.userPwd" [formControl]="pwd">
-      <mat-error *ngIf="!pwd.valid">请输入密码</mat-error>
-    </mat-form-field>
-  </mat-card-content>
-  <mat-card-actions class="login-actions">
-    <button mat-button disabled="!name.valid&&!pwd.vaild" (click)="login()" color="primary">登陆</button>
-    <button mat-button (click)="register()" color="accent">注册</button>
-  </mat-card-actions>
-</mat-card>
+<div class="main-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>登陆</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="login-form">
+      <form>
+        <mat-form-field>
+          <mat-label>用户名</mat-label>
+          <input matInput type="text" placeholder="用户名" [(ngModel)]="user.userName" autofocus [formControl]="name">
+          <mat-error *ngIf="!name.valid">请输入用户名</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>密码</mat-label>
+          <input matInput type="password" placeholder="密码" [(ngModel)]="user.userPwd" [formControl]="pwd">
+          <mat-error *ngIf="!pwd.valid">请输入密码</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="login-actions">
+      <button mat-button disabled="!name.valid&&!pwd.vaild" (click)="login()" color="primary">登陆</button>
+      <button mat-button (click)="register()" color="accent">注册</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

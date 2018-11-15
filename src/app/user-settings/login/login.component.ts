@@ -5,7 +5,7 @@ import { AuthService } from './../../directives/auth/auth.service';
 import { User } from './../../directives/interfaces';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Validators, FormControl} from '@angular/forms';
+import { Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +24,14 @@ export class LoginComponent implements OnInit {
   Router;
   AuthService;
   NavbarComponent;
-  name = new FormControl('', [Validators.required]);
-  pwd = new FormControl('', [Validators.required]);
+  name = new FormControl('', {
+    validators: Validators.required,
+    updateOn: 'blur'
+  });
+  pwd = new FormControl('', {
+    validators: Validators.required,
+    updateOn: 'blur'
+  });
 
   constructor(public authService: AuthService, router: Router, public client: HttpClient, navbarComponent: NavbarComponent) {
     this.Router = router;

@@ -1,0 +1,32 @@
+.line-container {
+  width: 80%
+}
+
+.line-card {
+  width: 100%;
+  margin: 0 20px 10px 20px
+}
+
+.place-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.place-card {
+  width: 100%;
+  margin: 0px 10px 20px 0px;
+  padding: 0;
+}
+
+.point-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.point-card {
+    min-width: 200px;
+    width: 200px;
+    height: 300px;
+    margin: 0px 10px 20px 0px;
+}

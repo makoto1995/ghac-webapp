@@ -4,7 +4,17 @@ import { AuthService } from './../../directives/auth/auth.service';
 import { User } from './../../directives/interfaces';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Validators, FormControl } from '@angular/forms';
+import { Validators, FormControl, FormGroup, FormBuilder, FormGroupDirective, NgForm } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material';
+
+export class ConfirmPwdErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
+    const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
+
+    return (invalidCtrl || invalidParent);
+  }
+}
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +22,7 @@ import { Validators, FormControl } from '@angular/forms';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
-  static parameters = [AuthService, Router, HttpClient];
+  static parameters = [AuthService, Router, HttpClient, FormBuilder];
   user: User = {
     userName: '',
     userPwd: '',
@@ -25,15 +35,48 @@ export class SignupComponent {
       canViewHistory: false
     }
   };
-  confirmPassword;
   errors = {};
   submitted = false;
   AuthService;
   Router;
+  signupForm: FormGroup;
+  matcher = new ConfirmPwdErrorStateMatcher();
+  // name = new FormControl('', {
+  //   validators: Validators.required,
+  //   updateOn: 'blur'
+  // });
+  // pwd = new FormControl('', {
+  //   validators: Validators.required,
+  //   updateOn: 'blur'
+  // });
+  confirmPassword;
 
-  constructor(_AuthService: AuthService, _Router: Router, public client: HttpClient) {
+  checkPassword(group: FormGroup) {
+    const pwd = group.controls.pwd.value;
+    const confirmPwd = group.controls.confirmPwd.value;
+    return pwd === confirmPwd ? null : {
+      notSame: true,
+    };
+  }
+
+  constructor(_AuthService: AuthService, _Router: Router, public client: HttpClient, public fb: FormBuilder) {
     this.AuthService = _AuthService;
     this.Router = _Router;
+    this.signupForm = this.fb.group({
+      name: ['', {
+        validators: Validators.required,
+        updateOn: 'blur'
+      }],
+      pwd: ['', {
+        validators: Validators.required,
+        updateOn: 'blur'
+      }],
+      confirmPwd: ['', {
+        updateOn: 'blur'
+      }]
+    }, {
+      validator: this.checkPassword
+    });
   }
 
   register() {
