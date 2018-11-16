@@ -40,7 +40,6 @@ class PointNode implements FilterNode {
   name: string;
   type: string;
   children: FilterNode[];
-  pointShown: boolean;
 }
 
 @Component({
@@ -74,27 +73,13 @@ export class RealTimeDataComponent implements OnInit, OnDestroy {
     , private _stompService: StompService
     , private _authService: AuthService
     , public dialog: MatDialog) {
+    this.AuthService = _authService;
     this.currentUser = _authService.currentUser;
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<FilterFlatNode>(this.getLevel, this.isExpandable);
     this.datasource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     this.dataChange.subscribe(data => {
       this.datasource.data = data;
-    });
-  }
-
-  getSelectedPoints = () => {
-    this.lineNodes = this.lineNodes.map((line: FilterNode) => {
-      line.children.map((place: FilterNode) => {
-        place.children.map((point: PointNode) => {
-          this.checklistSelection.isSelected(this.nestedNodeMap.get(point))
-          ? point.pointShown = true
-          : point.pointShown = false;
-          return point;
-        });
-        return place;
-      });
-      return line;
     });
   }
 
@@ -163,14 +148,14 @@ export class RealTimeDataComponent implements OnInit, OnDestroy {
     this.checklistSelection.isSelected(node)
       ? this.checklistSelection.select(...descendants)
       : this.checklistSelection.deselect(...descendants);
-    if (this.isEndPoint(0, node)) {
-      this.pointNodes.filter((point: PointNode) => {
-        return point.id === node.id && point.name === node.name;
-      }).map((point: PointNode) => {
-        point.pointShown = !point.pointShown;
-        return point;
-      });
-    }
+    // if (this.isEndPoint(0, node)) {
+    //   this.pointNodes.filter((point: PointNode) => {
+    //     return point.id === node.id && point.name === node.name;
+    //   }).map((point: PointNode) => {
+    //     point.pointShown = !point.pointShown;
+    //     return point;
+    //   });
+    // }
   }
 
   ngOnInit() {
@@ -199,7 +184,7 @@ export class RealTimeDataComponent implements OnInit, OnDestroy {
             id: ioPoint.id,
             name: ioPoint.address,
             type: ioPoint.type,
-            pointShown: true,
+            // pointShown: true,
             children: null,
             lineName: null,
             placeName: null
@@ -265,7 +250,6 @@ export class RealTimeDataComponent implements OnInit, OnDestroy {
                   });
                   parentLine.children.push(placeNode);
                 });
-                this.getSelectedPoints();
                 // 将显示数据初始化为产线节点列表
                 this.dataChange.next(this.lineNodes);
               }

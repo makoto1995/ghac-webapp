@@ -29,7 +29,9 @@ export class TrendChartComponent implements OnInit {
   currentDate: Date;
   currentHour;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public client: HttpClient) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {
+    line: Line
+  }, public client: HttpClient) {
     this.currentDate = new Date();
     this.currentHour = this.currentDate.getHours();
    }

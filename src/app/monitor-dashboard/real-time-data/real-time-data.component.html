@@ -40,7 +40,7 @@
               <mat-card-title>{{placeNode.name}}</mat-card-title>
             </mat-card-header>
             <mat-card-content class="point-container">
-              <mat-card class="point-card" *ngFor="let pointNode of placeNode.children" [hidden]="!pointNode.pointShown">
+              <mat-card class="point-card" *ngFor="let pointNode of placeNode.children" [hidden]="!checklistSelection.isSelected(nestedNodeMap.get(pointNode))">
                 <mat-card-header>
                   <mat-card-title>{{pointNode.name}}</mat-card-title>
                   <mat-card-subtitle>{{pointNode.type}}</mat-card-subtitle>
