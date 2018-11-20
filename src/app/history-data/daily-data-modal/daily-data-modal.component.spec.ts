@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReportDownloadComponent } from './report-download.component';
+import { DailyDataModalComponent } from './daily-data-modal.component';
 
-describe('ReportDownloadComponent', () => {
-  let component: ReportDownloadComponent;
-  let fixture: ComponentFixture<ReportDownloadComponent>;
+describe('DailyDataModalComponent', () => {
+  let component: DailyDataModalComponent;
+  let fixture: ComponentFixture<DailyDataModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReportDownloadComponent ]
+      declarations: [ DailyDataModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportDownloadComponent);
+    fixture = TestBed.createComponent(DailyDataModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

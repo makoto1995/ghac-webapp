@@ -5,7 +5,6 @@ import { createInputTransfer, createNewHosts, removeNgStyles } from '@angularcla
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserSettingsModule } from './user-settings/user-settings.module';
-import { ReportDownloadModule } from './report-download/report-download.module';
 import { MonitorDashboardModule } from './monitor-dashboard/monitor-dashboard.module';
 import { MainMonitorModule } from './main-monitor/main-monitor.module';
 import { HistoryDataModule } from './history-data/history-data.module';
@@ -32,7 +31,6 @@ const appRoutes: Routes = [{
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     UserSettingsModule,
-    ReportDownloadModule,
     MonitorDashboardModule,
     MainMonitorModule,
     HistoryDataModule,

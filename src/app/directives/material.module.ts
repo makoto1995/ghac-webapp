@@ -12,7 +12,7 @@ import {
     MatCardModule,
     MatCheckboxModule,
     // MatChipsModule,
-    // MatDatepickerModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
     // MatExpansionModule,
@@ -21,10 +21,10 @@ import {
     MatInputModule,
     // MatListModule,
     // MatMenuModule,
-    // MatNativeDateModule,
-    // MatPaginatorModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
     // MatProgressBarModule,
-    // MatProgressSpinnerModule,
+    MatProgressSpinnerModule,
     // MatRadioModule,
     // MatRippleModule,
     // MatSelectModule,
@@ -32,15 +32,14 @@ import {
     // MatSliderModule,
     // MatSlideToggleModule,
     // MatSnackBarModule,
-    // MatSortModule,
+    MatSortModule,
     // MatStepperModule,
-    // MatTableModule,
+    MatTableModule,
     // MatTabsModule,
     MatToolbarModule,
     // MatTooltipModule,
     MatTreeModule,
-    MatFormFieldModule,
-    MatNativeDateModule
+    MatFormFieldModule
 } from '@angular/material';
 
 @NgModule({
@@ -57,7 +56,7 @@ import {
         MatCheckboxModule,
         // MatChipsModule,
         // MatStepperModule,
-        // MatDatepickerModule,
+        MatDatepickerModule,
         MatDialogModule,
         MatDividerModule,
         // MatExpansionModule,
@@ -66,10 +65,10 @@ import {
         MatInputModule,
         // MatListModule,
         // MatMenuModule,
-        // MatNativeDateModule,
-        // MatPaginatorModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
         // MatProgressBarModule,
-        // MatProgressSpinnerModule,
+        MatProgressSpinnerModule,
         // MatRadioModule,
         // MatRippleModule,
         // MatSelectModule,
@@ -77,15 +76,14 @@ import {
         // MatSliderModule,
         // MatSlideToggleModule,
         // MatSnackBarModule,
-        // MatSortModule,
-        // MatTableModule,
+        MatSortModule,
+        MatTableModule,
         // MatTabsModule,
         MatToolbarModule,
         // MatTooltipModule,
         MatTreeModule,
         ScrollingModule,
-        MatFormFieldModule,
-        MatNativeDateModule
+        MatFormFieldModule
     ]
 })
 export class MaterialModule { }
