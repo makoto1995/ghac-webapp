@@ -10,10 +10,15 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 export class HistoryDataComponent implements OnInit {
   resultHeaders: string[] = ['日期', '操作'];
   dataSource: MatTableDataSource<DailyData>;
+  submitted = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   openDetail(data: DailyData) {
+  }
+
+  submit = () => {
+    this.submitted = true;
   }
 
   constructor() { }

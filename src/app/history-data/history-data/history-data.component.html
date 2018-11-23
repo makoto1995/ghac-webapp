@@ -1,33 +1,56 @@
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
+<mat-card style="margin: auto; width: 600px">
+  <mat-card-content>
 
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
+    <mat-form-field style="width: 400px">
+      <input matInput [matDatepicker]="startDatePicker" placeholder="开始日期">
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
 
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 日期 </th>
-      <td mat-cell *matCellDef="let row"> {{row.date}} </td>
-    </ng-container>
+    <mat-form-field style="width: 400px">
+      <input matInput [matDatepicker]="endDatePicker" placeholder="结束日期">
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
 
-    <ng-container matColumnDef="lineName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 产线名称 </th>
-      <td mat-cell *matCellDef="let row"> {{row.lineName}} </td>
-    </ng-container>
+    <button mat-button (click)="submit()">Submit</button>
+  </mat-card-actions>
+</mat-card>
+<div>
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
 
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 操作 </th>
-      <td mat-cell *matCellDef="let row">
-        <button mat-button (click)="openDetail(row)">
-          查看详情
-        </button>
-      </td>
-    </ng-container>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
 
-    <tr mat-header-row *matHeaderRowDef="resultHeaders"></tr>
-    <tr mat-row *matRowDef="let row; columns: resultHeaders;">
-    </tr>
-  </table>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> 日期 </th>
+        <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+      </ng-container>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      <ng-container matColumnDef="lineName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> 产线名称 </th>
+        <td mat-cell *matCellDef="let row"> {{row.lineName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> 操作 </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-button (click)="openDetail(row)">
+            查看详情
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="resultHeaders"></tr>
+      <tr mat-row *matRowDef="let row; columns: resultHeaders;">
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
 </div>
