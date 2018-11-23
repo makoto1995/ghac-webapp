@@ -46,3 +46,7 @@ export interface LineData {
     steam: number;
     waste: number;
 }
+export interface DailyData {
+    date: Date;
+    lineName: string;
+}
